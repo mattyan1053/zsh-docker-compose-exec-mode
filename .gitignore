@@ -1,0 +1,22 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Dependency/build outputs
+node_modules/
+dist/
+build/
+
+# Environments and secrets
+.env
+.env.local
+
+# Logs
+*.log
+
+# Specify tooling outputs (safe to regenerate)
+.specify/tmp/
