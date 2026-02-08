@@ -1,0 +1,13 @@
+# General
+.git
+.gitignore
+.DS_Store
+*.log
+
+# Project docs/specify metadata
+.specify
+specs/
+
+# Tests and temp
+tests/
+tmp/

@@ -1,0 +1,45 @@
+# shellcheck shell=bash
+
+DCE_ACTIVE=${DCE_ACTIVE:-0}
+DCE_SERVICE=${DCE_SERVICE:-""}
+DCE_OLD_PROMPT=${DCE_OLD_PROMPT:-""}
+DCE_OLD_RPROMPT=${DCE_OLD_RPROMPT:-""}
+DCE_OLD_PROMPT2=${DCE_OLD_PROMPT2:-""}
+DCE_WIDGET_SAVED=${DCE_WIDGET_SAVED:-0}
+DCE_OLD_BINDING=${DCE_OLD_BINDING:-""}
+DCE_WIDGET_NAME=${DCE_WIDGET_NAME:-_dce_accept_line_widget}
+DCE_BASE_PROMPT=${DCE_BASE_PROMPT:-""}
+DCE_BASE_RPROMPT=${DCE_BASE_RPROMPT:-""}
+DCE_OLD_CNF_HANDLER=${DCE_OLD_CNF_HANDLER:-""}
+
+_dce_set_prompt() {
+  DCE_BASE_PROMPT="$PROMPT"
+  DCE_BASE_RPROMPT="$RPROMPT"
+  DCE_OLD_PROMPT2="${PROMPT2:-}"
+  local marker="[in ${DCE_SERVICE}]"
+  PROMPT="$DCE_BASE_PROMPT"
+  if [[ -n "$DCE_BASE_RPROMPT" ]]; then
+    RPROMPT="${DCE_BASE_RPROMPT} ${marker}"
+  else
+    RPROMPT="${marker}"
+  fi
+}
+
+_dce_restore_prompt() {
+  [[ -n "$DCE_BASE_PROMPT" ]] && PROMPT="$DCE_BASE_PROMPT"
+  [[ -n "$DCE_BASE_RPROMPT" ]] && RPROMPT="$DCE_BASE_RPROMPT"
+  [[ -n "$DCE_OLD_PROMPT2" ]] && PROMPT2="$DCE_OLD_PROMPT2"
+  DCE_BASE_PROMPT=""
+  DCE_BASE_RPROMPT=""
+  DCE_OLD_PROMPT2=""
+}
+
+_dce_set_session() {
+  DCE_ACTIVE=1
+  DCE_SERVICE="$1"
+}
+
+_dce_clear_session() {
+  DCE_ACTIVE=0
+  DCE_SERVICE=""
+}
