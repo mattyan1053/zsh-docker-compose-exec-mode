@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Minimal docker mock for bats tests
+cmd="$1"; shift || true
+if [[ "$cmd" == "compose" ]]; then
+  sub="$1"; shift || true
+  case "$sub" in
+    version)
+      exit 0
+      ;;
+    ps)
+      if [[ "$1" == "--services" ]]; then
+        if [[ "$*" == *"status=running"* ]]; then
+          echo "web"
+        fi
+      fi
+      ;;
+    exec)
+      # passthrough: just echo command for assertion
+      echo "[mock exec] service=$1 cmd=${*:2}"
+      exit 0
+      ;;
+  esac
+fi
+exit 0

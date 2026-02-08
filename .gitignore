@@ -20,3 +20,5 @@ build/
 
 # Specify tooling outputs (safe to regenerate)
 .specify/tmp/
+
+tmp-docker/

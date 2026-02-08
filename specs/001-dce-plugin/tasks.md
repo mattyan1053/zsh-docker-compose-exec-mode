@@ -29,20 +29,20 @@ description: "Task list for Docker Compose Execモード zshプラグイン"
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-- [ ] T001 [P] 作業ディレクトリを作成（lib/, tests/）: `lib/`, `tests/`
-- [ ] T002 プラグイン本体のベースファイルを作成（ヘッダ/変数のみ）: `zsh-docker-compose-exec-mode.zsh`
-- [ ] T003 テストランナー雛形を追加（bats or shunit2 呼び出しスクリプト）: `tests/run.sh`
+- [X] T001 [P] 作業ディレクトリを作成（lib/, tests/）: `lib/`, `tests/`
+- [X] T002 プラグイン本体のベースファイルを作成（ヘッダ/変数のみ）: `zsh-docker-compose-exec-mode.zsh`
+- [X] T003 テストランナー雛形を追加（bats or shunit2 呼び出しスクリプト）: `tests/run.sh`
 
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-- [ ] T004 docker compose の存在/バージョン検証ヘルパーを実装: `lib/compose_check.zsh`
-- [ ] T005 サービス稼働確認ヘルパーを実装（`docker compose ps --services --filter status=running`）: `lib/compose_check.zsh`
-- [ ] T006 セッション状態管理とプロンプト退避/復元ヘルパーを実装: `lib/session_state.zsh`
-- [ ] T007 デバッグロギング（`DCE_DEBUG=1` 時 stderr 出力）ヘルパーを実装: `lib/logging.zsh`
-- [ ] T008 本体で各ヘルパーを読み込み、初期変数と安全なシェルオプション設定を追加: `zsh-docker-compose-exec-mode.zsh`
-- [ ] T009 テスト基盤を準備（モック用関数/環境、bats helper）: `tests/helpers.bash`
+- [X] T004 docker compose の存在/バージョン検証ヘルパーを実装: `lib/compose_check.zsh`
+- [X] T005 サービス稼働確認ヘルパーを実装（`docker compose ps --services --filter status=running`）: `lib/compose_check.zsh`
+- [X] T006 セッション状態管理とプロンプト退避/復元ヘルパーを実装: `lib/session_state.zsh`
+- [X] T007 デバッグロギング（`DCE_DEBUG=1` 時 stderr 出力）ヘルパーを実装: `lib/logging.zsh`
+- [X] T008 本体で各ヘルパーを読み込み、初期変数と安全なシェルオプション設定を追加: `zsh-docker-compose-exec-mode.zsh`
+- [X] T009 テスト基盤を準備（モック用関数/環境、bats helper）: `tests/helpers.bash`
 
 ---
 
@@ -53,15 +53,15 @@ description: "Task list for Docker Compose Execモード zshプラグイン"
 
 ### Tests for User Story 1
 
-- [ ] T010 [P] [US1] スモークテスト: start→`ls`→`echo ok`→end の透過実行を検証（モックdocker使用）: `tests/smoke_exec_mode.bats`
+- [X] T010 [P] [US1] スモークテスト: start→`ls`→`echo ok`→end の透過実行を検証（モックdocker使用）: `tests/smoke_exec_mode.bats`
 
 ### Implementation for User Story 1
 
-- [ ] T011 [US1] preexec フックで `dce` 以外の入力を `docker compose exec <service> zsh -lc "<cmd>"` に転送: `zsh-docker-compose-exec-mode.zsh`
-- [ ] T012 [US1] `dce start` を実装（依存チェック、サービス稼働確認、プロンプト付与、フック登録）: `zsh-docker-compose-exec-mode.zsh`
-- [ ] T013 [US1] `dce end` を実装（フック解除、プロンプト復元、状態クリア）: `zsh-docker-compose-exec-mode.zsh`
-- [ ] T014 [US1] 二重起動/ゾンビ検知ガードを追加し、再入防止メッセージを日本語で表示: `zsh-docker-compose-exec-mode.zsh`
-- [ ] T015 [US1] コンテナ内コマンド失敗時のエラーハンドリングと続行/終了案内を追加: `zsh-docker-compose-exec-mode.zsh`
+- [X] T011 [US1] preexec フックで `dce` 以外の入力を `docker compose exec <service> zsh -lc "<cmd>"` に転送: `zsh-docker-compose-exec-mode.zsh`
+- [X] T012 [US1] `dce start` を実装（依存チェック、サービス稼働確認、プロンプト付与、フック登録）: `zsh-docker-compose-exec-mode.zsh`
+- [X] T013 [US1] `dce end` を実装（フック解除、プロンプト復元、状態クリア）: `zsh-docker-compose-exec-mode.zsh`
+- [X] T014 [US1] 二重起動/ゾンビ検知ガードを追加し、再入防止メッセージを日本語で表示: `zsh-docker-compose-exec-mode.zsh`
+- [X] T015 [US1] コンテナ内コマンド失敗時のエラーハンドリングと続行/終了案内を追加: `zsh-docker-compose-exec-mode.zsh`
 
 ---
 
@@ -72,20 +72,20 @@ description: "Task list for Docker Compose Execモード zshプラグイン"
 
 ### Tests for User Story 2
 
-- [ ] T016 [P] [US2] ヘルプ/セットアップメッセージのテスト（パス誤り時の案内含む）: `tests/setup_help.bats`
+- [X] T016 [P] [US2] ヘルプ/セットアップメッセージのテスト（パス誤り時の案内含む）: `tests/setup_help.bats`
 
 ### Implementation for User Story 2
 
-- [ ] T017 [US2] README と quickstart にセットアップ手順を反映: `README.md`, `specs/001-dce-plugin/quickstart.md`
-- [ ] T018 [US2] `--help`/`help` 出力にセットアップ手順と使用例を追加: `zsh-docker-compose-exec-mode.zsh`
-- [ ] T019 [US2] 誤パス/未source時のガイダンスを実装（`dce` 実行時のエラーメッセージ）: `zsh-docker-compose-exec-mode.zsh`
+- [X] T017 [US2] README と quickstart にセットアップ手順を反映: `README.md`, `specs/001-dce-plugin/quickstart.md`
+- [X] T018 [US2] `--help`/`help` 出力にセットアップ手順と使用例を追加: `zsh-docker-compose-exec-mode.zsh`
+- [X] T019 [US2] 誤パス/未source時のガイダンスを実装（`dce` 実行時のエラーメッセージ）: `zsh-docker-compose-exec-mode.zsh`
 
 ---
 
 ## Phase 5: Polish & Cross-Cutting Concerns
 
-- [ ] T020 パフォーマンス簡易計測スクリプトを追加（start→コマンド実行の時間計測）: `scripts/bench.sh`
-- [ ] T021 shellcheck など lint/format を実行し、主要警告を修正: `zsh-docker-compose-exec-mode.zsh`, `lib/*.zsh`
+- [X] T020 パフォーマンス簡易計測スクリプトを追加（start→コマンド実行の時間計測）: `scripts/bench.sh`
+- [X] T021 lint/フォーマットを実施（zsh 本体は shellcheck 非対応のため `zsh -n`、ヘルパーは shellcheck 済み）: `zsh-docker-compose-exec-mode.zsh`, `lib/*.zsh`
 
 ---
 
