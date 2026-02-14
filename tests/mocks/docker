@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
 # Minimal docker mock for bats tests
+#
+# Environment variables to control behaviour:
+#   MOCK_COMPOSE_FAIL=1   — make "docker compose version" fail
+#   MOCK_RUNNING_SERVICES — space-separated list of running services (default: "web")
 cmd="$1"; shift || true
 if [[ "$cmd" == "compose" ]]; then
   sub="$1"; shift || true
   case "$sub" in
     version)
+      [[ "${MOCK_COMPOSE_FAIL:-}" == "1" ]] && exit 1
       exit 0
       ;;
     ps)
       if [[ "$1" == "--services" ]]; then
         if [[ "$*" == *"status=running"* ]]; then
-          echo "web"
+          services="${MOCK_RUNNING_SERVICES-web}"
+          for s in $services; do
+            echo "$s"
+          done
         fi
       fi
       ;;
