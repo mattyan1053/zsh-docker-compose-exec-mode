@@ -33,7 +33,7 @@ $ dce end
 ### オプション
 - `dce status` : 現在の exec モード状態を表示
 - `dce help`   : 使い方とセットアップ手順を表示
-- `dce start <service> --root` : root ユーザーで実行（通常は非root推奨）
+- `dce start --root <service>` : root ユーザーで実行（通常は非root推奨）
 - `DCE_NO_TTY=1` を付けて `dce start ...` すると `docker compose exec -T` で実行
 - `DCE_COLOR_MARKER=0` で `[in service]` の色付けをオフ（デフォルトは黄背景・赤文字）
 - `DCE_DEBUG=1` で実行時に置換後のコマンドを表示

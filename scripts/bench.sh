@@ -1,5 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 set -euo pipefail
+
+SCRIPT_DIR="${0:A:h}"
+source "${SCRIPT_DIR}/../zsh-docker-compose-exec-mode.zsh"
 
 service="${1:-}"
 if [[ -z "$service" ]]; then

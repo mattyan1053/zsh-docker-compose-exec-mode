@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=zsh
 
 _dce_log() {
   [[ -n "$DCE_DEBUG" ]] || return 0
