@@ -17,7 +17,7 @@ _dce_help() {
 dce - docker compose exec モード切り替え
 
 使い方:
-  dce start <service> [--root]   指定サービスでexecモード開始（デフォルト非root）
+  dce start [--root] <service>   指定サービスでexecモード開始（デフォルト非root）
   dce end                        execモード終了
   dce status                     状態表示
   dce help|--help|-h             このヘルプを表示
@@ -133,7 +133,7 @@ dce_start() {
   done
   service="$1"
   if [[ -z "$service" ]]; then
-    print -r -- "使用方法: dce start <service> [--root]" >&2
+    print -r -- "使用方法: dce start [--root] <service>" >&2
     return 1
   fi
   _dce_require_compose || return 1

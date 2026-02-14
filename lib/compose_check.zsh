@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=zsh
 # docker compose availability and service state checks
 
 _dce_require_compose() {
